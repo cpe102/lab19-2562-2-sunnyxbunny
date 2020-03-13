@@ -19,10 +19,10 @@ class Unit{
 		void showStatus();
 		void newTurn();
 		int attack(Unit &);
-		int beAttacked(int); //รับ input มาเป็น atk-daf=damage
-		int heal();	//rend แล้วต้องเช็คว่าเกิน hpmax ไหม **ห้ามเกิน hpmax
-		void guard(); //guard_on -> 0/1
-		bool isDead();	//when hp<=0
+		int beAttacked(int);
+		int heal();
+		void guard();
+		bool isDead();
 };
 
 void Unit::create(string t){ 
@@ -30,15 +30,15 @@ void Unit::create(string t){
 		type = "Hero";
 		cout << "Please input your name: ";
 		getline(cin,name);
-		hpmax = rand()%20+90; //90-109
-		atk = rand()%5+14; //14-18
-		def = rand()%3+9; //9-11
+		hpmax = rand()%20+90;
+		atk = rand()%5+14;
+		def = rand()%3+9; 
 	}else if(t == "Monster"){
 		type = "Monster";
 		name = "Monster";
-		hpmax = rand()%20+200; //200-219
-		atk = rand()%5+25; //25-29
-		def = rand()%3+5; //5-7
+		hpmax = rand()%20+200;
+		atk = rand()%5+25;
+		def = rand()%3+5; 
 	}
 	hp = hpmax;
 	guard_on = false;
@@ -72,7 +72,7 @@ int Unit::attack(Unit &x){
 int Unit::beAttacked(int oppatk){
 	int dmg;
 	dmg = oppatk - def;
-	if(guard_on = true) dmg = dmg*0.33;
+	if(guard_on == true) dmg = dmg*0.33;
 	hp = hp - dmg;
 	return dmg;
 }
@@ -82,9 +82,9 @@ int Unit::heal(){
 	healrd = rand()%21+10; //10-30
 	hp = hp+healrd;
 	if(hp>hpmax){
-		hp=hp-healrd;
-		healrd = rand()%21+10;
-		hp = hp+healrd;
+		int a = hp-hpmax;
+		hp=hp-a;
+		healrd=healrd-a;
 	}
 	return healrd;
 }
